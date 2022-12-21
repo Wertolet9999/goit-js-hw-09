@@ -12,8 +12,6 @@ const refs = {
 };
 refs.startBtnEl.setAttribute('disabled', 'disabled');
 refs.startBtnEl.addEventListener('click', onStartButtonClick);
-
-
 const currentDate = Date.now();
 let startTime = null;
 const options = {
@@ -26,7 +24,7 @@ const options = {
     let difTime = selectedDates[0] - currentTime;
     if (selectedDates[0] < currentDate) {
       Notiflix.Notify.init({position: 'center-top'});
-      Notiflix.Notify.failure('Please choose a date in the future');
+      Notiflix.Notify.failure('Date must be in the future');
       return;
     }
     refs.startBtnEl.removeAttribute('disabled', 'disabled');
@@ -39,6 +37,7 @@ const options = {
   },
 };
 const pickerDate = flatpickr(refs.timeInputEl, options);
+
 function onStartButtonClick() {
   refs.startBtnEl.setAttribute('disabled', 'disabled');
   const timerID = setInterval(() => {
@@ -69,7 +68,6 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   return { days, hours, minutes, seconds };
 }
-
 function addLeadingZero(value) {
   return String(value).padStart(2, "0");
 }
